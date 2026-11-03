@@ -1,5 +1,4 @@
 'use strict';
-// ♡ choreography workshop — v1
 const POSES={
  front:['assemble','demi_plie','developpe_seconde','echappe','fifth_position','first_position','fourth_position','grand_plie','passe','port_de_bras','preparatory','releve','reverence','saute','second_position','standing','tendu','third_position'],
  side:['arabesque','arabesque_basse','attitude_derriere','attitude_devant','cambre_derriere','developpe_devant','fourth_position','passe','releve','standing','tendu_derriere','tendu_devant']
@@ -46,8 +45,6 @@ function renderPreview(){const s=state.selection;const img=$('preview');img.src=
 function setBpm(n){const previousBpm=state.bpm;state.bpm=clampBpm(n);$('bpm-value').textContent=state.bpm;$('bpm-slider').value=state.bpm;$('bpm-slider').style.setProperty('--tempo-fill',`${(state.bpm-40)/180*100}%`);$('bpm-input').value=state.bpm;let label=tempos[0][0];for(const [name,bpm] of tempos){if(state.bpm>=bpm)label=name}$('tempo-name').textContent=label;document.querySelectorAll('[data-bpm]').forEach(b=>b.classList.toggle('active',Number(b.dataset.bpm)===state.bpm));persist();renderSummary();if(audio.context && (audio.running || playback.running))changeClockTempo(previousBpm)}
 function renderSummary(){const beats=state.steps.reduce((sum,s)=>sum+s.beats,0);const seconds=beats*60/state.bpm;$('timeline-summary').textContent=state.steps.length?`${state.steps.length} ${state.steps.length===1?'pose':'poses'} · ${beats} beats · ${seconds.toFixed(1)} seconds`:'no poses yet'}
 function updateProgress(p){const value=Math.max(0,Math.min(100,p));$('progress-fill').style.width=value+'%';document.querySelector('.progress-track').setAttribute('aria-valuenow',String(Math.round(value)));document.querySelector('.progress-track').setAttribute('aria-valuetext',`beat ${Math.min(totalChoreographyBeats(),Math.floor(value/100*totalChoreographyBeats())+1)}`)}
-// Keep pointer capture on the stationary ribbon, not on a card being moved in the DOM.
-// Moving a captured card can cancel capture and leave a visually sorted but unsaved ribbon.
 let drag=null;
 function startStepDrag(event,card,index){
  if(event.button!==undefined&&event.button!==0)return;
@@ -68,7 +65,6 @@ function moveStepDrag(event){
  let destination=other.findIndex(card=>pointerX<card.getBoundingClientRect().left+card.getBoundingClientRect().width/2);
  if(destination<0)destination=other.length;
  const reference=other[destination]||null;
- // Only mutate the DOM when the card's position actually changes.
  const cards=[...list.querySelectorAll('.step')];
  if(cards.indexOf(drag.card)!==destination)list.insertBefore(drag.card,reference);
 }
@@ -83,7 +79,6 @@ function finishStepDrag(event){
  if(to>=0&&from!==to)changeSteps(()=>{const [step]=state.steps.splice(from,1);state.steps.splice(to,0,step)});
  else renderTimeline();
 }
-// Listeners live on the stable parent, including cancellation and unexpected capture loss.
 const ribbon=$('timeline');
 ribbon.addEventListener('pointermove',moveStepDrag);
 ribbon.addEventListener('pointerup',finishStepDrag);
@@ -115,8 +110,6 @@ function renderTimeline(){
  });renderSummary();
 }
 function changeSteps(change){stopPlayback();change();persist();renderTimeline()}
-// One Web Audio clock drives both the choreography and the metronome.
-// The metronome button only controls whether the scheduled ticks are audible.
 const audio={context:null,running:false,timer:null,origin:0,nextBeat:0,token:0,scheduled:[]};
 function ensureAudio(){const C=window.AudioContext||window.webkitAudioContext;if(!C)throw new Error('this browser does not support web audio');if(!audio.context)audio.context=new C();if(audio.context.state==='suspended')audio.context.resume();return audio.context}
 function tick(time,accent){const ctx=audio.context;if(!ctx)return;const osc=ctx.createOscillator(),gain=ctx.createGain();osc.type='sine';osc.frequency.setValueAtTime(accent?1050:780,time);osc.frequency.exponentialRampToValueAtTime(accent?690:540,time+.035);gain.gain.setValueAtTime(.0001,time);gain.gain.exponentialRampToValueAtTime(accent?.10:.065,time+.003);gain.gain.exponentialRampToValueAtTime(.0001,time+.055);osc.connect(gain).connect(ctx.destination);osc.start(time);osc.stop(time+.06);audio.scheduled.push({osc,gain,time})}
@@ -154,11 +147,11 @@ function seekToBeat(beat){
  if(!playback.running)$('playback-status').textContent='ready to play from here';
 }
 
-function stopPlayback(){playback.position=0;playback.running=false;cancelAnimationFrame(playback.raf);playback.index=-1;document.querySelectorAll('.step').forEach(e=>e.classList.remove('playing'));updateProgress(0);$('play').textContent='▶ play';$('playback-status').textContent='ready to compose';stopSchedulerIfIdle()}
-function play(){if(playback.running){stopPlayback();return}if(!state.steps.length)return;const startBeat=playback.position;stopPlayback();playback.position=startBeat;try{ensureAudio()}catch(e){alert(e.message);return}playback.running=true;audio.clockBpm=state.bpm;resetClock();if(startBeat>0){audio.token++;silenceScheduled();audio.origin=audio.context.currentTime+.05-startBeat*60/state.bpm;audio.nextBeat=Math.ceil(startBeat);startScheduler()}$('play').textContent='Ⅱ pause';$('playback-status').textContent='playing choreography';const totalBeats=state.steps.reduce((sum,s)=>sum+s.beats,0);
+function stopPlayback(){playback.position=0;playback.running=false;cancelAnimationFrame(playback.raf);playback.index=-1;document.querySelectorAll('.step').forEach(e=>e.classList.remove('playing'));updateProgress(0);$('play').textContent='play';$('playback-status').textContent='ready to compose';stopSchedulerIfIdle()}
+function play(){if(playback.running){stopPlayback();return}if(!state.steps.length)return;const startBeat=playback.position;stopPlayback();playback.position=startBeat;try{ensureAudio()}catch(e){alert(e.message);return}playback.running=true;audio.clockBpm=state.bpm;resetClock();if(startBeat>0){audio.token++;silenceScheduled();audio.origin=audio.context.currentTime+.05-startBeat*60/state.bpm;audio.nextBeat=Math.ceil(startBeat);startScheduler()}$('play').textContent='pause';$('playback-status').textContent='playing choreography';const totalBeats=state.steps.reduce((sum,s)=>sum+s.beats,0);
 function frame(){if(!playback.running)return;const beat=Math.max(0,(audio.context.currentTime-audio.origin)*state.bpm/60);playback.position=beat;if(beat>=totalBeats){const last=state.steps.at(-1);showPlaybackPose(last);stopPlayback();$('playback-status').textContent='the dance is finished.';updateProgress(100);return}let cursor=0,index=0;for(let i=0;i<state.steps.length;i++){cursor+=state.steps[i].beats;if(beat<cursor){index=i;break}}if(index!==playback.index){playback.index=index;showPlaybackPose(state.steps[index]);document.querySelectorAll('.step').forEach((card,i)=>card.classList.toggle('playing',i===index))}updateProgress(beat/totalBeats*100);playback.raf=requestAnimationFrame(frame)}playback.raf=requestAnimationFrame(frame)}
 function showPlaybackPose(s){state.selection={view:s.view,name:s.name,mirror:s.mirror,head:s.head||'side'};renderPreview();setView(s.view)}
-// Ballet-notebook notation: count ranges, view headings, written instructions.
+
 function notation(){
  const lines=[`title: ${state.choreographyTitle.trim()||'untitled choreography'}`,`tempo: ${state.bpm} bpm`,''];
  let view='',count=1,group=[],groupBeats=0;
@@ -200,7 +193,7 @@ function readPose(raw,view,lineNo){
  if(/\{front\}/i.test(text)){head='front';text=text.replace(/\{front\}/ig,'').trim()}
  else if(/\{side\}/i.test(text)){text=text.replace(/\{side\}/ig,'').trim()}
  if(/\bmirror\b/i.test(text)){mirror=true;text=text.replace(/\bmirror\b/ig,'').trim()}
- // Backward compatibility with the previous compact notation.
+ 
  if(/(?:^|\s)~(?:\s|$)/.test(text)){mirror=true;text=text.replace(/(?:^|\s)~(?=\s|$)/g,' ').trim()}
  if(/\^/.test(text)){head='front';text=text.replace(/\^/g,'').trim()}
  text=text.replace(/(?:^|\s)>(?=\s|$)/g,' ').trim();
@@ -267,7 +260,7 @@ $('save').onclick=copyNotation;
 $('import-open').setAttribute('aria-controls','notation-panel');$('import-open').setAttribute('aria-expanded','false');
 $('import-open').onclick=()=>{if(!$('notation-panel').hidden){closeNotation();return} $('notation-heading').textContent='import choreography';$('notation-load').hidden=false;$('notation-error').hidden=true;openNotation()};
 $('notation-cancel').onclick=closeNotation;
-// The sample is real, importable notation, rather than placeholder-only text.
+
 $('notation-input').value=EXAMPLE_NOTATION;
 function applyNotation(data){
  stopPlayback();
