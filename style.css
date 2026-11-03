@@ -1,0 +1,282 @@
+:root{
+    --paper:#faf7f4;
+    --white:#fffdfb;
+    --rose:#ddd2ce;
+    --rose-deep:#c4b0ab;
+    --taupe:#aa9e99;
+    --ink:#948b87;
+    --muted:#a09591;
+    --line:#e7dddb;
+    --shadow:0 8px 30px #6e51420a
+}*{box-sizing:border-box}
+body{
+    margin:0;
+  background-image: url('./img/bg.png');
+  background-repeat: repeat;
+  background-color: #f2efed;
+  color: #bba4a4;
+  font-family: 'Lora', serif;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  letter-spacing: 0.3px;
+  cursor: url('./img/cursor.png'), auto;
+  scrollbar-color: #e2d5d0 transparent;
+}
+a {
+  color: #c0ada9;
+  text-decoration: none;
+  text-shadow: 0 0 2px #dcccc9;
+}
+
+a:hover {
+  color: #dcccc9;
+  text-shadow: 0 0 2px #e8e1e1;
+  cursor: url('./img/cursorh.png'), pointer;
+}
+
+.link {
+  transition: 1s;
+}
+.link:hover {
+  filter: blur(1px);
+  transition: 1s;
+}
+
+    i {
+        text-decoration: none;
+        color: #C0ADA9;
+        text-shadow: 0 0 2px #cec1bb;
+    }
+
+
+button {
+  font: inherit;
+  cursor: url('./img/cursorh.png'), pointer;
+  outline: none;
+}
+
+        ::selection {
+            text-shadow: 0 0 2px #cec1bb;
+            color: #cec1bb
+        }
+
+        ::-moz-selection {
+            text-shadow: 0 0 2px #cec1bb;
+            color: #cec1bb
+        }
+
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e2d5d0;
+  border-radius: 10px;
+}
+button,input{font:inherit}button{cursor: url('./img/cursorh.png'), pointer; outline: none;}button:focus-visible,input:focus-visible{border:1px solid #b4a7a1;outline-offset:3px}.site-header{text-align:center;padding:39px 16px 27px}.eyebrow{font-style:italic;letter-spacing:.1em;font-size:0.8rem;color:#c5b7b7}
+h1{
+  color: #9e8d8d;
+  font-size: 1.9rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-shadow: 0 0 2px #cec1bb;
+    margin:9px 0 5px;
+}
+h1 span{color:#c7a19a}.site-header p{font-size:14px;font-style:italic;color:var(--muted);margin:0}.workspace{width:min(1450px,calc(100% - 44px));margin:0 auto;display:grid;grid-template-columns:minmax(270px,1.1fr) minmax(300px,1.1fr) minmax(260px,.85fr);gap:18px;align-items:stretch}
+.panel{
+    border: 50px solid transparent;
+    border-image-source: url('./img/border.png');
+    border-image-slice: 20% fill;
+    border-image-repeat: round;
+    background-clip: padding-box;
+    background-color: transparent;
+    padding:10px;
+    min-width:0;
+}
+.section-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:17px}.section-heading h2{font-size:23px;font-weight:400;margin:5px 0 0}.subtle,
+.hint{
+  color:var(--muted);
+  font-size:12px;
+  line-height:15px;
+  margin:14px 0 0;
+  text-align:center;
+}
+.hintbox{
+  width:70%;
+  margin:0 auto;
+}
+.hint2{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.7;
+  margin:14px 0 0;
+  text-align:left;
+}
+code{
+  background-color:#f4f0ee;
+}
+.tabs{display:flex;gap:7px;margin-bottom:12px}.tab,.soft-button,.primary-button,.text-button,.tempo-presets button,.bpm-stepper button{border-radius:5px;padding:9px 13px;border:1px solid var(--line);background:#f4f0ee;color:#7a7070;font-size:13px}.tab{flex:1}.tab.active,.tempo-presets button.active{background:#ece6e3;border-color:#dad3cf}.search-wrap input{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:5px;background:#fff;font-size:13px;color:var(--ink)}.pose-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:12px;max-height:425px;overflow:auto;padding:2px 4px 4px 0}.pose-card{border:1px solid var(--line);border-radius:5px;background:#fffdfa;padding:7px 4px 9px;display:flex;flex-direction:column;align-items:center;gap:5px;color:var(--ink);min-width:0}.pose-card.selected{background:#ebe6e5;border-color:#dad3cf}.pose-card img{height:105px;width:100%;object-fit:contain;pointer-events:none}.pose-card span{text-align:center;font:11px/1.3 Georgia,serif;min-height:27px}
+.library{
+    border: 40px solid transparent;
+    border-image-source: url('./img/frame.png');
+    border-image-slice: 20% fill;
+    border-image-repeat: round;
+    background-clip: padding-box;
+    background-color: transparent;
+}
+.stage-panel{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    padding-bottom:20px;
+    border: 60px solid transparent;
+    border-image-source: url('./img/mirror.png');
+    border-image-slice: 20% fill;
+    border-image-repeat: round;
+    background-clip: padding-box;
+    background-color: transparent;
+}
+.stage
+{
+    height:385px;
+    position:relative;
+    border-radius:5px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    border: 25px solid transparent;
+    border-image-source: url('./img/lace2.png');
+    border-image-slice: 10% fill;
+    background-clip: padding-box;
+    background-color: transparent;
+  background-image: url('./img/bg2.png');
+  background-repeat: repeat;
+}
+.music-panel{
+    border: 40px solid transparent;
+    border-image-source: url('./img/frame.png');
+    border-image-slice: 20% fill;
+    border-image-repeat: round;
+    background-clip: padding-box;
+    background-color: transparent;
+}
+.stage img{position:relative;z-index:1;width:100%;height:100%;object-fit:contain;transition:opacity .12s}.stage-floor{position:absolute;bottom:7%;left:26%;right:26%;}.preview-name{text-align:center;font-size:20px;font-style:italic;margin:14px 0}.preview-controls{display:flex;gap:9px;justify-content:center;flex-wrap:wrap}.primary-button{background:#f4f0ee;color:#8f8383;border-color:#E6DAD2}.primary-button:hover{background:#ece6e3}.soft-button:hover,.tab:hover,.pose-card:hover{border-color:#dad1cc}.wide{width:100%}.bpm-readout{text-align:center;padding:6px 0 17px}.bpm-readout strong{display:block;font-size:57px;font-weight:400;line-height:1.05}.bpm-readout span{font-size:12px;font-style:italic;color:var(--muted)}.tempo-presets{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:21px}.tempo-presets button{padding:10px 4px;font-style:italic}.tempo-presets small{display:block;font:10px Arial,sans-serif;margin-top:5px;color:var(--muted)}.slider-label{display:flex;justify-content:space-between;gap:10px;font-size:13px}.slider-label span{font-style:italic;color:var(--muted)}input[type=range]{width:100%;accent-color:#bc9589;margin:13px 0 4px}.range-ends{display:flex;justify-content:space-between;font:10px Arial,sans-serif;color:var(--muted)}.bpm-stepper{display:flex;justify-content:center;align-items:center;margin:19px 0 22px;gap:7px}.bpm-stepper button{font-size:19px;width:38px}.bpm-stepper input{width:80px;text-align:center;padding:9px 4px;border:1px solid var(--line);border-radius:5px;color:var(--ink);background:#fff}.metronome-area{border-top:1px solid var(--line);padding-top:21px}.beat-lights{display:flex;gap:12px;justify-content:center;margin-bottom:17px}.beat-lights span{height:11px;width:11px;border-radius:50%;background:#e9ded8;transition:background .08s}.beat-lights span.on{background:#dac9c5}
+.timeline-panel{
+    grid-column:1/-1;
+    border: 50px solid transparent;
+    border-image-source: url('./img/lace.png');
+    border-image-slice: 20% fill;
+    border-image-repeat: round;
+    background-clip: padding-box;
+    background-repeat: repeat;
+    background-color: transparent;
+}
+.timeline-heading{margin-bottom:10px}.timeline-actions,.timeline-footer{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.timeline-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);gap:10px;margin-bottom:11px}.progress-track{height:5px;background:#f1edea;border-radius:5px;overflow:hidden}.progress-track>div{width:0;height:100%;background:#eee8e7;transition:width .09s linear}.timeline{display:flex;align-items:stretch;gap:10px;overflow-x:auto;padding:18px 2px 16px;min-height:166px}.timeline-empty{display:flex;align-items:center;justify-content:center;flex:1;color:var(--muted);font-style:italic;font-size:14px;border:1px dashed var(--line);border-radius:5px}
+.step{
+    flex:0 0 154px;
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:10px;
+  background-image: url('./img/bg2.png');
+  background-repeat: repeat;
+    position:relative;
+}
+.step.playing{
+    border:1px solid #b4a7a1;
+  background-image: url('./img/bg2.png');
+  background-repeat: repeat;
+}
+.step-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font:11px Arial,sans-serif}.step img{display:block;width:100%;height:110px;object-fit:contain}.step-name{font-size:12px;text-align:center;min-height:29px}.step-controls{display:flex;align-items:center;justify-content:center;gap:4px;margin-top:8px}.step-controls button{border:1px solid var(--line);background:white;color:var(--ink);border-radius:4px;padding:4px 7px;font-size:12px}.step-controls input{width:44px;padding:4px 1px;text-align:center;border:1px solid var(--line);border-radius:4px;font-size:12px;color:var(--ink)}.step-controls label{font-size:10px;color:var(--muted)}.step-remove{border:0;background:transparent;color:var(--muted);font-size:16px}.timeline-footer{border-top:1px solid var(--line);padding-top:15px}.text-button{border:0;background:transparent;color:var(--muted);margin-left:auto}.import-label{cursor: url('./img/cursorh.png'), pointer;}footer{text-align:center;color:var(--muted);font-size:12px;font-style:italic;padding:27px}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}@media(max-width:1100px){.workspace{grid-template-columns:1fr 1fr}
+.music-panel{
+    grid-column:1/-1;
+}
+.tempo-presets{grid-template-columns:repeat(6,1fr)}}@media(max-width:700px){.workspace{width:calc(100% - 24px);display:flex;flex-direction:column;gap:12px}.panel{padding:16px}.pose-grid{grid-template-columns:repeat(4,minmax(0,1fr));max-height:340px}
+.pose-card img{height:85px}.stage{height:330px}.tempo-presets{grid-template-columns:repeat(3,1fr)}.section-heading h2{font-size:21px}.site-header{padding-top:25px}}
+
+/* ♡ Drag-and-drop choreography ribbon */
+.step-grip{border:0;background:transparent;color:var(--taupe);font-size:21px;line-height:1;cursor:grab;padding:2px 7px 2px 0;touch-action:none;user-select:none}
+.step-grip:active{cursor:grabbing}
+.step.dragging{border-color:#b4a7a1;background:#f4f0ee;box-shadow:0 4px 18px #6e514222;opacity:.83;z-index:2}
+.timeline.is-sorting{user-select:none}
+.timeline.is-sorting .step:not(.dragging){transition:transform .12s ease}
+
+/* Choreography title and written ballet notation */
+.choreography-title-wrap{display:flex;align-items:center;gap:12px;margin:3px 0 17px;flex-wrap:wrap}
+.choreography-title-wrap label{font-size:13px;color:var(--muted);font-style:italic}
+.choreography-title-wrap input{flex:1;min-width:180px;max-width:440px;padding:10px 12px;border:1px solid var(--line);border-radius:5px;background:#fff;color:var(--ink)}
+#notation-dialog{width:min(620px,calc(100% - 28px));max-height:90vh;border:1px solid var(--line);border-radius:9px;padding:0;background:var(--white);color:var(--ink);box-shadow:0 20px 70px #55423b35}
+#notation-dialog::backdrop{background:#4e3d3855}
+.notation-dialog-inner{padding:24px}
+#notation-dialog h2{font-size:24px;font-weight:400;margin:5px 0 0}
+#notation-input{display:block;width:100%;min-height:190px;resize:vertical;margin:18px 0 12px;padding:13px;border:1px solid var(--line);border-radius:5px;background:#fffdfa;color:var(--ink);font:13px/1.8 Georgia,serif}
+.notation-actions{display:flex;gap:9px;justify-content:flex-end}
+.notation-error{font-size:13px;color:#9d514a;background:#fff0ed;border:1px solid #edcfc9;padding:9px;border-radius:5px}
+
+.head-controls{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:7px;margin:0 0 12px;font-size:12px;color:var(--muted)}
+.head-button{padding:7px 10px;background:#fffdfa;border:1px solid var(--line);border-radius:5px;color:var(--ink);font-size:12px}
+.head-button.active{background:#ebe6e5;border-color:#dad3cf}
+.step-controls{flex-wrap:wrap}
+.step-controls button{white-space:nowrap}
+
+/* Version 6: a quieter, text-only pose cabinet. */
+.pose-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;max-height:425px;align-content:start;}
+.pose-card{display:flex;align-items:center;justify-content:flex-start;min-height:40px;padding:9px 12px;text-align:left;}
+.pose-card span{text-align:left;min-height:0;font-size:0.8rem; letter-spacing: 0.3px;}
+/* Reduce the ballerina by 20%, keeping the same stage and central alignment. */
+.stage img{width:80%;height:80%;}
+@media(max-width:700px){.pose-grid{grid-template-columns:repeat(2,minmax(0,1fr));max-height:340px;}}
+@media(max-width:390px){.pose-grid{grid-template-columns:1fr;}}
+
+/* Inline import panel beneath the choreography ribbon actions. */
+textarea{
+    cursor: url('./img/cursorw.png'), pointer;
+    outline: none;
+}
+input{
+    cursor: url('./img/cursorw.png'), pointer;
+    outline: none;
+}
+.notation-panel{margin-top:17px;padding:19px 20px 21px;border:1px solid var(--line);border-radius:6px;background:#fbf7f4;max-width:100%;}
+.notation-panel[hidden]{display:none;}
+.notation-panel .notation-dialog-inner{padding:0;}
+.notation-panel .section-heading{margin-bottom:8px;}
+.notation-panel h2{font-size:21px;font-weight:400;margin:5px 0 0;}
+.notation-panel .notation-actions{margin-top:12px;}
+@media(max-width:700px){.notation-panel{padding:15px;}
+h1 {
+    font-size: 1.6rem;
+  }}
+/* seekable choreography progress and clickable pose cards */
+.progress-track{height:10px;cursor: url('./img/cursorh.png'), pointer;;overflow:visible;position:relative;touch-action:none}
+.progress-track>div{border-radius:5px;position:relative}
+.progress-track>div::after{content:'';position:absolute;right:-5px;top:50%;width:10px;height:10px;border-radius:50%;background:#e2d5d0;transform:translateY(-50%)}
+.progress-track:focus-visible{outline:2px solid var(--rose-deep);outline-offset:4px}
+.step{cursor: url('./img/cursorh.png'), pointer;}.step button,.step input{cursor: url('./img/cursorh.png'), pointer; outline: none;}.step-grip{cursor:grab!important}
+
+/* tempo slider: a soft blush counterpart to the choreography progress track */
+#bpm-slider{
+  -webkit-appearance:none;appearance:none;display:block;width:100%;height:10px;
+  margin:16px 0 8px;padding:0;border:0;border-radius:999px;outline:none;
+  background:linear-gradient(to right,#e2d5d0 0%,#e2d5d0 var(--tempo-fill,31.11%),#f1edea var(--tempo-fill,31.11%),#f1edea 100%);
+  cursor:url('./img/cursorh.png'),pointer;
+}
+#bpm-slider::-webkit-slider-runnable-track{height:10px;border-radius:999px;background:transparent}
+#bpm-slider::-moz-range-track{height:10px;border-radius:999px;background:transparent}
+#bpm-slider::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;width:19px;height:19px;margin-top:-4.5px;
+  border:2px solid #fffdfb;border-radius:50%;background:#d7c4bf;
+  box-shadow:0 0 0 1px #d9c9c5,0 2px 5px #6e514218;
+  cursor:url('./img/cursorh.png'),pointer;
+}
+#bpm-slider::-moz-range-thumb{
+  width:15px;height:15px;border:2px solid #fffdfb;border-radius:50%;
+  background:#d7c4bf;box-shadow:0 0 0 1px #d9c9c5,0 2px 5px #6e514218;
+  cursor:url('./img/cursorh.png'),pointer;
+}
+#bpm-slider:focus-visible{outline:2px solid var(--rose-deep);outline-offset:5px}
