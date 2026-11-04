@@ -175,10 +175,35 @@ function notation(){
  flush();
  return lines.join('\n').trimEnd();
 }
+function copyUsingSelection(content){
+ // ios safari is more reliable when a copy starts directly in the click event.
+ const field=document.createElement('textarea');
+ field.value=content;field.setAttribute('readonly','');
+ field.style.cssText='position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;font-size:16px;';
+ document.body.appendChild(field);
+ const previous=document.activeElement;
+ try{
+  field.focus();field.select();field.setSelectionRange(0,field.value.length);
+  return document.execCommand('copy');
+ }finally{
+  field.remove();
+  if(previous&&typeof previous.focus==='function')previous.focus({preventScroll:true});
+ }
+}
 async function copyNotation(){
  const content=notation();
- try{await navigator.clipboard.writeText(content);$('save').textContent='notation copied !';setTimeout(()=>$('save').textContent='♡ copy notation',1800)}
- catch(e){
+ const isiPad=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+ let copied=false;
+ // Try the synchronous selection route first on ipad, before any await loses the gesture.
+ if(isiPad){try{copied=copyUsingSelection(content)}catch(e){console.warn('selection copy unavailable',e)}}
+ if(!copied){
+  try{await navigator.clipboard.writeText(content);copied=true}catch(e){console.warn('clipboard api unavailable',e)}
+ }
+ if(!copied&&!isiPad){try{copied=copyUsingSelection(content)}catch(e){console.warn('selection copy unavailable',e)}}
+ if(copied){
+  $('save').textContent='notation copied !';
+  setTimeout(()=>$('save').textContent='♡ copy notation',1800);
+ }else{
   const box=$('notation-input');$('notation-heading').textContent='copy choreography';box.value=content;
   $('notation-error').hidden=true;$('notation-load').hidden=true;openNotation();box.focus();box.select();
  }
@@ -207,6 +232,12 @@ function readPose(raw,view,lineNo){
  return {view,name,mirror,head,beats};
 }
 function parseNotation(raw){
+ // Accept text pasted from browsers that unexpectedly URL-encode clipboard content.
+ // Only decode when the entire notation looks encoded, never ordinary '%' characters.
+ const pasted=raw.trim();
+ if(/^title%3a/i.test(pasted)&&/%0a/i.test(pasted)){
+  try{raw=decodeURIComponent(pasted)}catch(e){/* keep the original for validation */}
+ }
  const lines=raw.replaceAll('\r','').split('\n');let name='',bpm=null,view=null;
  const steps=[];let expectedCount=null;
  for(let i=0;i<lines.length;i++){
